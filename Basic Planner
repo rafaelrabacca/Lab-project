@@ -1,0 +1,753 @@
+/*
+title: Basic Planner
+Author: Juan Rafael D. Rabacca
+description: The programn tackles the a persons lack of time management skills. 
+It can easily show reminders and a person's schedule. This is particularly useful since it can be easily accessed in the computer
+learnings: Technical skills learned are the use of external files to store and use for the program. Debugging a program was also difficult.
+           Soft skills learned: It is extremely difficult to work alone. It is better to delegate the different parts so it won't be time consuming.
+           Working on it alone, 
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>	//needed for time functions
+#include <string.h> //needed for strings
+
+void menu();
+void showsched();
+void currenttime();
+void newschedule();
+void activitycheck();
+void addactivity();
+//void deleteme();
+//void sort();
+
+void addprojects();
+void newprojects();
+void checkremainingtime();
+void checkprojectlist();
+
+	main()
+	{ 
+ 
+        char rest;
+		printf("\n");
+        char choice;
+		//printf("compilation check");
+		menu();
+		printf("\n");
+		printf("\n");
+		printf("\tPlease input your letter of choice...");
+		scanf("%c", &choice);
+		printf("\n");
+		printf("\n");
+		
+				
+		switch(choice)
+		{	
+			case 'A':
+			case 'a':
+				printf("\n");
+				//printf("Hello Check for a"); // test if case A works
+				printf("\n");
+				
+				showsched(); //calls
+				
+				printf("\n");
+				printf("Press enter to continue\n");
+                scanf("%c", &rest);
+                getchar(); //absorbs newline from enter
+				
+				main();
+				break; // stops it from continuing to other cases
+				
+				
+			case 'B':
+			case 'b':
+				printf("\n");
+				//printf("Hello Check for b"); // test if case B works
+				printf("\n");
+				
+				currenttime();
+				
+				printf("\n");
+				printf("Press enter to continue\n");
+                scanf("%c", &rest);
+				getchar();
+				main();
+				break;
+				
+			case 'c':
+			case 'C':
+				printf("\n");
+
+				activitycheck();
+				
+				printf("\n");
+				printf("Press enter to continue\n");
+                scanf("%c", &rest);
+				getchar();
+				main();
+				break;	
+			
+			case 'D':
+			case 'd':
+				printf("\n");
+				addactivity();
+				printf("\n");
+				showsched();
+				printf("\n");
+				printf("Press enter to continue\n");
+                scanf("%c", &rest);
+				getchar();
+				main();
+				break;
+				
+			case 'e':
+			case 'E':
+				printf("\n");
+				
+				newschedule();
+				
+				printf("\n");
+				printf("Press enter to continue\n");
+                scanf("%c", &rest);
+				getchar();
+				main();
+				break;
+			
+           /* case 'F':
+			case 'f':
+				printf("\n");
+				
+				deleteme();
+				
+				printf("\n");
+				printf("Press enter to continue\n");
+                scanf("%c", &rest);
+				getchar();
+				main();
+				break;*/
+				
+			case 'w':
+			case 'W':
+				printf("\n");
+				
+				checkprojectlist();
+				
+				printf("\n");
+				printf("Press enter to continue\n");
+                scanf("%c", &rest);
+				getchar();
+				main();
+				break;
+				
+			case 'X':
+			case 'x':
+				printf("\n");
+				
+				checkremainingtime();
+				
+				printf("\n");
+				printf("Press enter to continue\n");
+                scanf("%c", &rest);
+				getchar();
+				main();
+				break;
+				
+			case 'Z':
+			case 'z':
+				printf("\n");
+				
+				newprojects();
+				
+				printf("\n");
+				printf("Press enter to continue\n");
+                scanf("%c", &rest);
+				getchar();
+				main();
+				break;
+		
+			case 'y':
+			case 'Y':
+				printf("\n");
+				
+				addprojects();
+				
+				printf("\n");
+				printf("Press enter to continue\n");
+                scanf("%c", &rest);
+				getchar();
+				main();
+				break;
+								
+			case 'q':
+			case 'Q':
+				printf("\n");			
+				printf("\n");
+				return 0;
+				break;
+				
+			
+			default:
+			{
+				printf("\tInvalid Entry!");
+				printf("\n");
+				printf("\n");
+				printf("\n");
+				printf("Press ENTER to continue\n");
+                scanf("%c", &rest);
+				getchar();
+				main();
+				break;
+			}
+		}
+	system("Pause");
+	}
+	
+void menu()
+{
+printf("\t");	printf("||========="); printf("=============== Menu for Schedule==============="); printf("=====|| \n");
+printf("\t");	printf("||"); printf("\t\t\t\t\t\t\t\t||\n");
+	
+printf("\t");	printf("||"); printf(" A: Show complete schedule \t\t\t\t\t|| \n");
+printf("\t");	printf("||"); printf(" B: Show current time\t\t\t\t\t\t|| \n");
+printf("\t");	printf("||"); printf(" C: Check what's next \t\t\t\t\t|| \n");
+printf("\t");	printf("||"); printf(" D: Add to Schedule");printf("\t\t\t\t\t\t|| \n");
+printf("\t");	printf("||"); printf(" E: Input new schedule (Warning: This overwrites old schedule)|| \n");
+printf("\t");	printf("||"); printf(" Q: Quit\t\t\t\t\t\t\t|| \n");
+	
+printf("\t");	printf("||"); printf("\t\t\t\t\t\t\t\t||\n");	
+printf("\t");	printf("||========="); printf("=============== Menu for Projects==============="); printf("=====|| \n");
+printf("\t");	printf("||"); printf("\t\t\t\t\t\t\t\t||\n");
+	
+printf("\t");	printf("||"); printf(" W: Show projects \t\t\t\t\t\t|| \n");
+printf("\t");	printf("||"); printf(" X: Check for remaining time\t\t\t\t\t|| \n");
+printf("\t");	printf("||"); printf(" Y: Add to Project list");printf("\t\t\t\t\t|| \n");
+printf("\t");	printf("||"); printf(" Z: Create a new list of projects(Warning:Overwrites old list)|| \n");
+printf("\t");	printf("||"); printf(" Q: Quit\t\t\t\t\t\t\t|| \n");
+	
+printf("\t");	printf("||"); printf("\t\t\t\t\t\t\t\t||\n");
+	
+printf("\t");	printf("||==============================================================||");
+	
+}
+
+void showsched() // nothing inside parenthesis since nothing needs to be passed
+{
+	FILE *file = fopen("sched.txt", "r"); // opens the file. Opened for reading ("r")
+	char Schedlist; 
+	do									// program will print the .txt file
+	{
+		Schedlist = fgetc(file);		// schedlist is defined as a character in the documents, as in a single character only. It will keep printing the first character.
+		printf("%c", Schedlist);
+	}
+	while(Schedlist != EOF);			// as long as it isn't End of File (EOF)
+	
+	printf("\n");printf("\n");
+}
+
+void currenttime()
+{
+	time_t timenow;						//struct
+	time(&timenow);						//calls current time on computer
+	
+	printf("\t=====> %s \n", ctime(&timenow));	//displays time
+
+}
+
+void newschedule()
+{
+	FILE *file = fopen("sched.txt", "w");	//opens the file for writing "w"
+	
+	//printf("Hello check for c \n");		//check if cqse C and newschedule works
+	
+	int countevents;						
+	
+	printf("Amount of events in your schedule?...");
+	scanf ("%d", &countevents);							//appears first on txt file. Used in determining how many lines there are
+	
+	fprintf(file, "%d event(s) \n", countevents);
+	printf("\n");
+
+	for (int i = 0; i < countevents; i++)
+	{
+		char event[50] = {0};
+		int timestart, timeend;
+				
+		printf("At what time will activity %d start? (Military Time e.g 0900, 2300)\n...", i+1);
+		scanf("%04d", &timestart);
+		printf("\n");
+		
+		printf("At what time will activity %d end? (Military Time e.g 0900, 2300)\n...", i+1);
+		scanf("%04d", &timeend);
+		printf("\n");
+		
+		printf("What is the name of activity %d? (Seperate words with underscore ( _ ) and limit it to 50 characters)\n...\n", i+1);
+		scanf("%s", event);
+		printf("\n");
+		
+		fprintf(file, "%04d to %04d %s \n", timestart, timeend, event);	
+	}
+	printf("\n");printf("\n");
+	
+	printf("Schedule Complete!");
+	printf("\n\n");
+	
+	fclose(file);
+	
+	showsched();
+}
+
+void activitycheck()
+
+
+{
+	//printf("Hello Check for d\n");
+		
+	FILE *file = fopen("sched.txt", "r");
+	//FILE *temp = fopen("temp.txt", "w");
+	
+	int countactivities;
+	fscanf(file, "%d", &countactivities);
+	//printf("countactivities = %d\n", countactivities);
+	
+
+	char events[15];
+	
+	fscanf(file, "%s", events); //, newline &begintime, dash, &endtime, actname ); // informs user how many activities needs to be done
+	//printf("test %s \n", events );
+	
+	
+	printf("Your upcoming/current activities are \n");	
+	
+	for( int i = 0; i < countactivities; i++)		// the i is used to represent the line
+	{
+		time_t timenow;
+		time(&timenow);
+		char actname[60], to[2];
+		int begintime, endtime;
+		
+		fscanf(file, "%d %s %d %s", &begintime, to, &endtime, actname); //scans the respective integers andd letters
+		//printf("%04d %s %04d %s\n", begintime, to, endtime, actname);
+		
+		struct tm *timeisit = localtime(&timenow);						//used to obtain local hour
+		//printf("%i \n", timeisit->tm_hour);
+			
+		if(begintime >= (timeisit->tm_hour) * 100  )					//checks what activities are next
+		{
+			printf("%d. %s at %04d \n",i+1, actname, begintime  );
+		}
+		
+	}
+	
+	
+	fclose(file);
+}
+
+void addactivity()
+{
+	FILE *file = fopen("sched.txt", "r");
+	FILE *fpw = fopen("temp.txt", "w");
+	
+	int counting;
+	int noacts;
+	int countevents;
+	int initialcount;
+	char events[10];
+	
+	char to[2];
+	char actname[60];
+	int begintime;
+	int endtime;
+	
+	printf("What will the new number of activities be?\n");
+	scanf("%d", &countevents);
+	
+	fprintf(fpw, "%d event(s)\n", countevents);
+
+
+	fscanf(file, "%d", &initialcount);
+	//printf("countevents = %d\n", countevents);
+	
+	fscanf(file, "%s", events);
+	
+	for(int i = 0; i<initialcount; i++)
+	{
+		fscanf(file, "%04d %s %04d %s", &begintime, to, &endtime, actname);
+		fprintf(fpw, "%04d %s %04d %s\n", begintime, to, endtime, actname);
+	}
+	
+	fclose(file);
+	fclose(fpw);
+	
+	noacts = countevents - initialcount;
+	
+	//printf("%d %d %d", noacts, countevents, initialcount);	
+		
+	FILE *fp = fopen("temp.txt", "a");
+	
+	printf("\n\tNext is the activities you want to add\n");
+	for (int i = 0; i < noacts; i++)
+	{
+		char event[10] = {0};
+		int timestart, timeend;
+				
+		printf("At what time will activity %d start? (Military Time e.g 0900, 2300)\n...", i+initialcount);
+		scanf("%04d", &timestart);
+		printf("\n");
+		
+		printf("At what time will activity %d end? (Military Time e.g 0900, 2300)\n...", i+initialcount);
+		scanf("%04d", &timeend);
+		printf("\n");
+		
+		printf("What is the name of activity %d? (Seperate words with underscore ( _ ) and limit it to 50 characters)\n...\n", i+initialcount);
+		scanf("%s", event);
+		printf("\n");
+		
+		fprintf(fp, "%04d to %04d %s \n", timestart, timeend, event);	
+	}
+	
+	printf("\n");printf("\n");
+	
+	printf("Schedule Complete!");
+	printf("\n\n");
+	
+	fclose(fp);
+	
+
+	
+	FILE *fpopen = fopen("temp.txt", "r");
+	FILE *filewrite = fopen("sched.txt", "w");
+	
+	fscanf(fpopen, "%d %s", &countevents, events);
+	fprintf(filewrite, "%d event(s)\n", countevents);	
+	
+	for (int i = 0; i < countevents; i++)
+	{
+		fscanf(fpopen, "%04d %s %04d %s", &begintime, to, &endtime, actname);
+		fprintf(filewrite, "%04d to %04d %s\n", begintime, endtime, actname);
+	}
+
+	fclose(fpopen);	
+	fclose(filewrite);
+}
+
+/*
+void sort()
+{
+	FILE *file = fopen("sched.txt", "r");
+	FILE *fp = fopen("sched.txt", "w");
+	
+	int countevents;
+	char events;
+	
+	fscanf(file, "%d %s", &countevents, events);
+	
+	char actname[countevents][60];
+	//char* actname[][60] = { "%s"};
+	int	 begintime[countevents];
+	int endtime[countevents];
+	
+	char tempactname;
+	int tempbegintime;
+	int tempendtime;
+	
+	char tempactname2;
+	int tempbegintime2;
+	int tempendtime2;
+	
+	char to;
+		
+	for(int i = 0; i < countevents; i++)
+	{
+		fscanf(file, "%d %s %d %s", &begintime[i], to, &endtime[i], actname[i]);
+	}
+	
+	for(int i = 0; i < countevents-1; i++)
+	{
+		for(int j = 0; j < countevents; j++)
+		{
+			if(begintime[i] > begintime[j])
+			{
+				tempactname = actname[i];
+				tempbegintime = begintime[i];
+				tempendtime = endtime[i];
+				
+				tempactname2 = actname[j];
+				tempbegintime2 = begintime[j];
+				tempendtime2 = endtime[j];
+				
+				actname[i] = tempactname2;
+				begintime[i] = tempbegintime2;	
+				endtime[i] = tempendtime2;
+				
+				actname[j] = tempactname;
+				begintime[j] = tempbegintime;	
+				endtime[j] = tempendtime;
+				
+			}
+		}
+	}
+	
+	fprintf(fp, "%d event(s)", countevents);
+	for(int i = 0; i < countevents; i++)
+	{
+		fprintf(fp, "%d to %d %s", begintime[i], endtime[i], actname[i]);
+	}
+	
+	fclose(fp);
+	fclose(file);	
+}
+*/
+
+void newprojects()
+{
+	
+	FILE *file = fopen("projectlist.txt", "w");
+	
+	int numprojects;
+	int deadlinemonth;
+	int deadlineday;
+	char projectname[60];
+	
+	printf("How many projects do you have to do?");
+	scanf("%d", &numprojects);
+	
+	fprintf(file, "%d project(s)\n", numprojects);
+	
+	for(int i = 0; i < numprojects; i++)
+	{
+		printf("When is the deadline of your project? (month in numbers)...");
+		scanf("%d", &deadlinemonth);
+		
+		printf("When is the deadline of your project? (day in numbers)...");
+		scanf("%d", &deadlineday);
+		
+		printf("What is the name of the project? (seperate words with underscores '_', instead of spaces)...\n\n");
+		scanf("%s", projectname);
+		
+		fprintf(file, "Pass %s by %d / %d\n", projectname, deadlinemonth, deadlineday);
+	}
+	
+	
+	fclose(file);
+}
+
+void checkprojectlist()
+{
+	FILE *file = fopen("projectlist.txt", "r"); // opens the file. Opened for reading ("r")
+	char projlist; 
+	do									// program will print the .txt file
+	{
+		projlist = fgetc(file);		// schedlist is defined as a character in the documents, as in a single character only. It will keep printing the first character.
+		printf("%c", projlist);
+	}
+	while(projlist != EOF);			// as long as it isn't End of File (EOF)
+	fclose(file);
+	printf("\n");
+}
+
+void checkremainingtime()
+{
+	FILE *file = fopen("projectlist.txt", "r");
+
+	char projects[30];
+	char extra1[10], extra2[10], extra3[10];
+
+    int i=0;
+	int numprojects;
+	int deadlinemonth;
+	int deadlineday;
+	char projectname[60];
+	int yesorno;
+		
+	time_t timenow;
+	time(&timenow);
+	
+	struct tm *timeisit = localtime(&timenow);
+	
+	fscanf(file, "%d", &numprojects);
+	//fscanf(file, "%s", projects);
+	
+    fscanf(file, "%s", projects);
+	
+	//printf("%d", numprojects);
+	
+
+	/*for(int i = 0; i < numprojects; i++);
+	{
+		int remainday;
+		int remainmonths;
+		
+		fscanf(file, "%s %s %s %d %s %d", extra1, projectname, extra2, &deadlinemonth, extra3, &deadlineday);
+		printf("%s %s %s %d %s %d\n", extra1, projectname, extra2, deadlinemonth, extra3, deadlineday);
+		
+        remainday = deadlineday - timeisit->tm_mday;
+		remainmonths = deadlinemonth - timeisit->tm_mon+1;
+		
+		printf("You have %d months and %d day(s) to finish %s\n", remainmonths, remainday, projectname);
+	}*/
+	
+	do
+	{
+        
+        int remainday;
+		int remainmonths;
+		
+		fscanf(file, "%s %s %s %d %s %d", extra1, projectname, extra2, &deadlinemonth, extra3, &deadlineday);
+		printf("%s %s %s %d %s %d\n", extra1, projectname, extra2, deadlinemonth, extra3, deadlineday);
+		
+        remainday = deadlineday - timeisit->tm_mday;
+		remainmonths = deadlinemonth - timeisit->tm_mon+1;
+		
+		printf("You have %d months and %d day(s) to finish %s\n", remainmonths, remainday, projectname);
+		
+		i = i+1;
+		
+		
+        }
+        
+        while ( i < numprojects);
+              
+        
+	fclose(file);
+}
+
+void addprojects()
+{
+	FILE *file = fopen("projectlist.txt", "r");
+	FILE *fpw = fopen("temp2.txt", "w");
+	
+	int counting;
+	int noacts;
+	int countprojects;
+	int initialcount;
+	char projects[20];
+	
+	char extra1[10], extra2[10], extra3[10];
+	int deadlinemonth;
+	int deadlineday;
+	char projectname[60];
+	
+	printf("What will the new number of projects be?\n");
+	scanf("%d", &countprojects);
+	
+	fprintf(fpw, "%d project(s)\n", countprojects);
+
+
+	fscanf(file, "%d", &initialcount);
+	//printf("countevents = %d\n", countevents);
+	
+	fscanf(file, "%s", projects);
+	
+	for(int i = 0; i<initialcount; i++)
+	{
+		fscanf(file, "%s %s %s %d %s %d", extra1, projectname, extra2, &deadlinemonth, extra3, &deadlineday);
+		fprintf(fpw, "%s %s %s %d %s %d\n", extra1, projectname, extra2, deadlinemonth, extra3, deadlineday);
+	}
+	
+	fclose(file);
+	fclose(fpw);
+	
+	noacts = countprojects - initialcount;
+	
+	//printf("%d %d %d", noacts, countevents, initialcount);	
+		
+	FILE *fp = fopen("temp2.txt", "a");
+	
+	printf("\n\tNext are the project(s) you want to add\n");
+	
+	for(int i = 0; i < noacts; i++)
+	{
+		printf("When is the deadline of your project? (month in numbers)...");
+		scanf("%d", &deadlinemonth);
+		
+		printf("When is the deadline of your project? (day in numbers)...");
+		scanf("%d", &deadlineday);
+		
+		printf("What is the name of the project? (seperate words with underscores '_', instead of spaces)...");
+		scanf("%s", projectname);
+		
+		fprintf(file, "Pass %s by %d / %d\n", projectname, deadlinemonth, deadlineday);
+	}
+	
+	printf("\n");printf("\n");
+	
+	
+	printf("\n\n");
+	
+	fclose(fp);
+	
+
+	
+	FILE *fpopen = fopen("temp2.txt", "r");
+	FILE *filewrite = fopen("projectlist.txt", "w");
+	
+	fscanf(fpopen, "%d %s", &countprojects, projects);
+	fprintf(filewrite, "%d event(s)\n", countprojects);	
+	
+	for (int i = 0; i < countprojects; i++)
+	{
+		fscanf(fpopen, "%s %s %s %d %s %d", extra1, projectname, extra2, &deadlinemonth, extra3, &deadlineday);
+		fprintf(filewrite, "%s %s %s %d %s %d\n", extra1, projectname, extra2, deadlinemonth, extra3, deadlineday);
+	}
+	
+	printf("Projects Added!");
+	
+	fclose(fpopen);	
+	fclose(filewrite);
+}
+
+/*void deleteme()
+{
+     FILE *file = fopen("projectlist.txt", "r");
+	 FILE *fpw = fopen("temp2.txt", "w");
+	 
+	 int newprojects;
+     int nprojects;
+	 char proj[15];
+	 int keep;
+	 
+      char extra1[10], extra2[10], extra3[10];
+      int deadlinemonth;
+      int deadlineday;
+      char projectname[60];
+	 
+     fscanf(file, "%d %s", nprojects, proj);
+     
+     printf("What will the new number of projects be?...");
+     scanf("%d", &newprojects);
+     //printf("%d", newprojects);
+     
+     fprintf(fpw, "%d event(s)", newprojects);
+     
+     for(int i = 0; i < nprojects ; i++)
+     {
+            
+             fscanf(file, "%s %s %s %d %s %d", extra1, projectname, extra2, &deadlinemonth, extra3, &deadlineday);
+             printf("%s %s %s %d %s %d \n", extra1, projectname, extra2, deadlinemonth, extra3, deadlineday);
+             printf("Would you like to keep %s? yes == 1 || no == 0", projectname);
+             scanf("%d", &keep);
+             
+             if(keep == '1'){
+                     fprintf(fpw, "%s %s %s %d %s %d \n", extra1, projectname, extra2, deadlinemonth, extra3, deadlineday);
+             }
+                      
+     
+     }
+     
+     
+     fclose(fpw);
+     
+     FILE *filewrite = fopen("projectlist.txt", "w");
+  
+     fprintf(filewrite, "%c event(s)", newprojects);
+     for(int i = 0; i < newprojects; i++)
+     {
+             fprintf(filewrite, "%s %s %s %d %s %d \n", extra1, projectname, extra2, deadlinemonth, extra3, deadlineday);
+     }
+     fclose(file);
+     fclose(filewrite);
+}
+*/
